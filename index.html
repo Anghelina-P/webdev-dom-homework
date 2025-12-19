@@ -46,11 +46,13 @@
       </ul>
       <div class="add-form">
         <input
+          name="name"
           type="text"
           class="add-form-name"
           placeholder="Введите ваше имя"
         />
         <textarea
+          name="comment"
           type="textarea"
           class="add-form-text"
           placeholder="Введите ваш коментарий"
@@ -64,8 +66,56 @@
   </body>
 
   <script>
+
     "use strict";
-    // Код писать здесь
-    console.log("It works!");
+    
+  const nameInp = document.querySelector('.add-form-name');
+  const commInp = document.querySelector('.add-form-text');
+  const button = document.querySelector('.add-form-button');
+  const commUl = document.querySelector('.comments');
+  const commLi = document.createElement('li');
+
+  button.addEventListener('click', () => {
+      
+  const name = nameInp.value;
+  const commentText = commInp.value;
+  
+  const newComment = document.createElement('li');
+  newComment.className = 'comment';
+  
+  
+  const now = new Date();
+  const day = now.getDate().toString().padStart(2, '0');        
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); 
+  const year = now.getFullYear().toString().slice(-2);          
+  const hours = now.getHours().toString().padStart(2, '0');     
+  const minutes = now.getMinutes().toString().padStart(2, '0'); 
+
+const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}`;
+
+  newComment.innerHTML = `
+    <div class="comment-header">
+      <div>${name}</div>
+      <div>${formattedDate}</div>
+    </div>
+    <div class="comment-body">
+      <div class="comment-text">
+        ${commentText}
+      </div>
+    </div>
+    <div class="comment-footer">
+      <div class="likes">
+        <span class="likes-counter">0</span>
+        <button class="like-button"></button>
+      </div>
+    </div>
+  `;
+  
+ 
+  commUl.appendChild(newComment); 
+  
+  nameInp.value = '';
+  commInp.value = '';
+});
   </script>
 </html>

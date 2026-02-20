@@ -48,14 +48,20 @@
         <input
           name="name"
           type="text"
+          required
+          minlength="2"
+          autocomplete="name"
           class="add-form-name"
           placeholder="Введите ваше имя"
         />
         <textarea
           name="comment"
           type="textarea"
+          required
+          minlength="2"
+          autocomplete="off" 
           class="add-form-text"
-          placeholder="Введите ваш коментарий"
+          placeholder="Введите ваш комментарий"
           rows="4"
         ></textarea>
         <div class="add-form-row">
@@ -76,12 +82,17 @@
 
   button.addEventListener('click', () => {
 
-  const name = nameInp.value;
-  const commentText = commInp.value;
+  const name = nameInp.value.trim(); 
+  const commentText = commInp.value.trim();
   
   const newComment = document.createElement('li');
   newComment.className = 'comment';
   
+
+  if (name === '' || commentText === '') {
+    console.log("сперва запоните оба поля");
+    return;
+  }
   
   const now = new Date();
   const day = now.getDate().toString().padStart(2, '0');        
